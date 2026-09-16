@@ -1,34 +1,44 @@
-variable "projects" {
-  type = map(object({
-    proj_name        = string
-    proj_description = string
-    proj_visibility  = string  # e.g., "private" or "public"
-    proj_vcs         = string  # e.g., "Git" or "Tfvc"
-    proj_wi_template = string  # e.g., "Agile", "Scrum", "CMMI"
-  }))
+variable "name" {
+  description = "The name of the Azure DevOps project."
+  type        = string
+}
 
-  description = <<DESC
-A map defining the Azure DevOps projects to be created. Each project must include:
-  - `proj_name`: The display name of the project.
-  - `proj_description`: A short description of the project.
-  - `proj_visibility`: Project visibility setting ('private' or 'public').
-  - `proj_vcs`: The version control system to use ('Git' or 'Tfvc').
-  - `proj_wi_template`: The work item process template ('Agile', 'Scrum', 'CMMI', etc.).
-DESC
+variable "description" {
+  description = "The description of the Azure DevOps project."
+  type        = string
+  default     = ""
+}
 
-  default = {
-    sample_project = {
-      proj_name        = "SampleProject"
-      proj_description = "This is a sample Azure DevOps project."
-      proj_visibility  = "private"
-      proj_vcs         = "Git"
-      proj_wi_template = "Agile"
-    }
+variable "visibility" {
+  description = "The visibility of the project. Valid values are 'private' or 'public'."
+  type        = string
+  default     = "private"
+
+  validation {
+    condition     = contains(["private", "public"], var.visibility)
+    error_message = "visibility must be either 'private' or 'public'."
   }
 }
 
-variable "organization_name" {
-  description = "Name of the Azure DevOps organization under which the projects will be created."
+variable "version_control" {
+  description = "The version control system used by the project. Valid values are 'Git' or 'Tfvc'."
   type        = string
-  default     = "my-azure-devops-org"
+  default     = "Git"
+
+  validation {
+    condition     = contains(["Git", "Tfvc"], var.version_control)
+    error_message = "version_control must be either 'Git' or 'Tfvc'."
+  }
+}
+
+variable "work_item_template" {
+  description = "The work item process template. Common values: 'Agile', 'Scrum', 'CMMI', 'Basic'."
+  type        = string
+  default     = "Agile"
+}
+
+variable "features" {
+  description = "Optional map of feature states for the project. Each key is a feature name ('boards', 'repositories', 'pipelines', 'testplans', 'artifacts') and value is 'enabled' or 'disabled'."
+  type        = map(string)
+  default     = null
 }
