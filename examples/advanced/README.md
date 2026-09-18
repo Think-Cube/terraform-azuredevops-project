@@ -1,13 +1,13 @@
-# Example: Basic — Azure DevOps Project
+# Example: Advanced — Azure DevOps Project
 
-Provisions a private Git project using the Scrum work item template with all main features enabled.
+Private Scrum project with all five feature areas enabled.
 
 ```hcl
 module "ado_project" {
   source = "github.com/Think-Cube/terraform-azuredevops-project?ref=v1.0.0"
 
-  name               = "my-project"
-  description        = "Main application project"
+  name               = "myapp-platform"
+  description        = "Platform engineering project — infrastructure, pipelines and shared libraries"
   visibility         = "private"
   version_control    = "Git"
   work_item_template = "Scrum"
@@ -16,7 +16,7 @@ module "ado_project" {
     boards       = "enabled"
     repositories = "enabled"
     pipelines    = "enabled"
-    testplans    = "disabled"
+    testplans    = "enabled"
     artifacts    = "enabled"
   }
 }
