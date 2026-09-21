@@ -1,5 +1,5 @@
 module "ado_project" {
-  source = "github.com/Think-Cube/terraform-azuredevops-project?ref=v1.0.0"
+  source = "../.."
 
   name               = "myapp-platform"
   description        = "Platform engineering project — infrastructure, pipelines and shared libraries"
