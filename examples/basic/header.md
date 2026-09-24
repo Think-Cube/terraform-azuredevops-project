@@ -1,4 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
 # Example: Basic — Azuredevops Project
 
 Provisions an Azure DevOps Project with configurable features and visibility. Minimal example using required inputs only.
@@ -24,17 +23,3 @@ module "ado_project" {
   }
 }
 ```
-
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | ~> 1.0 |
-
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_ado_project"></a> [ado\_project](#module\_ado\_project) | ../.. | n/a |
-<!-- END_TF_DOCS -->
